@@ -82,7 +82,7 @@ export const getFilmById = async (id) => {
   return film;
 };
 
-export const getPersonmById = async (id) => {
+export const getPersonById = async (id) => {
   const person = await getResourse(`/people/${id}`);
 
   return person;

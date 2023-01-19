@@ -21,11 +21,8 @@ export const Main: React.FC<Props> = ({
   planets,
   isLoading,
 }) => {
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [planets, setPlanets] = useState<Planet[]>([]);
   const [perPage, setPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
-  // const [total, setTotal] = useState(0);
 
   const firstItem = (currentPage - 1) * perPage;
   const lastItem = Math.min((firstItem + perPage), total);
@@ -42,28 +39,6 @@ export const Main: React.FC<Props> = ({
   const onPageChange = (newPage: number) => {
     setCurrentPage(newPage);
   };
-
-  // const getPlanetsFromServer = useCallback(async () => {
-  //   try {
-  //     setIsLoading(true);
-  //     const planetsFromServer = await getPlanets();
-
-  //     console.log(planetsFromServer);
-  //     console.log(planetsFromServer[1].url.split('/').slice(-2)[0]);
-
-  //     setTotal(planetsFromServer.length);
-  //     setPlanets(planetsFromServer);
-  //   } catch (error) {
-  //     throw new Error(`${error}`);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   console.log(planets);
-  //   getPlanetsFromServer();
-  // }, []);
 
   return (
     <div>

@@ -11,6 +11,10 @@ body {
   .page__section {
     background-color: #fff;
   }
+
+  .page__logo {
+    width: 60px;
+  }
   /* .select {
     background-color: theme('colors.white');
     border-radius: theme('borderRadius.lg');

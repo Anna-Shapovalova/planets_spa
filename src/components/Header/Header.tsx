@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-// import logo from '../../assets/img/logo.jpg';
+import logo from '../../assets/img/logo.png';
 
 /* eslint-disable max-len */
 export const Header: React.FC = () => {
@@ -44,7 +44,11 @@ export const Header: React.FC = () => {
                   data-mdb-ripple="true"
                   data-mdb-ripple-color="light"
                 >
-                  <img src="../../assets/img/logo.jpg" alt="logo" />
+                  <img
+                    src={logo}
+                    alt="logo"
+                    className="page__logo"
+                  />
                 </Link>
               </li>
               <li className="nav-item">

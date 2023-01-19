@@ -1,10 +1,10 @@
-/* eslint-disable no-console */
 import React, { useCallback, useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { getPeople, getPlanets, getResourse } from './api/planets';
 
 import { Main } from './modules/Main';
 import { PlanetPage } from './modules/PlanetPage';
+import { PersonPage } from './modules/PersonPage';
 import { Film } from './types/Film';
 import { Person } from './types/Person';
 import { Planet } from './types/Planet';
@@ -22,13 +22,6 @@ export const App: React.FC = () => {
       const planetsFromServer = await getPlanets();
       const filmsFromServer = await getResourse('/films/');
       const peopleFromServer = await getPeople();
-
-      console.log(planetsFromServer);
-      console.log(planetsFromServer[1].url.split('/').slice(-2)[0]);
-      console.log(filmsFromServer.results);
-      console.log(peopleFromServer);
-      console.log(films);
-      console.log(people);
 
       setTotal(planetsFromServer.length);
       setPlanets(await planetsFromServer);
@@ -60,6 +53,7 @@ export const App: React.FC = () => {
             )}
           />
           <Route path="/home" element={<Navigate to="/" replace />} />
+
           <Route path="/">
             <Route
               index
@@ -71,6 +65,7 @@ export const App: React.FC = () => {
                 />
               )}
             />
+
             <Route
               path=":name"
               element={(
@@ -81,7 +76,15 @@ export const App: React.FC = () => {
               )}
             />
           </Route>
-          {/* <Route path="*" element={<NotFoundPage />} /> */}
+
+          <Route
+            path="/person/:id"
+            element={(
+              <PersonPage
+                planets={planets}
+              />
+            )}
+          />
         </Routes>
       </main>
     </div>
