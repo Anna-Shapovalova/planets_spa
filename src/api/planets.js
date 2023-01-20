@@ -23,7 +23,7 @@ const urlsPeople = [
 const urlBase = 'https://swapi.dev/api';
 const imgBase = 'https://starwars-visualguide.com/assets/img';
 
-const checkStatus = (response) => {
+export const checkStatus = (response) => {
   if (response.ok) {
     return Promise.resolve(response);
   }
@@ -91,6 +91,16 @@ export const getPersonById = async (id) => {
   const person = await getResourse(`/people/${id}`);
 
   return person;
+};
+
+export const getItemByUrl = async (url) => {
+  const res = await fetch(`${url}`);
+
+  if (!res.ok) {
+    throw new Error(`Could not fetch ${url} , received ${res.status}`);
+  }
+
+  return res.json();
 };
 
 export const getPersonImg = (id) => {

@@ -1,59 +1,64 @@
+/* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable max-len */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { getPlanetById, getPlanetImg } from '../../api/planets';
+import {
+  getFilmById,
+  getPersonById,
+  getPlanetById,
+  getPlanetImg,
+} from '../../api/planets';
+import { transformNumber, transformString } from '../../utils/transformString';
 
 import { Loader } from '../Loader/Loader';
 
-import { Person } from '../../types/Person';
-import { Film } from '../../types/Film';
 import { Planet } from '../../types/Planet';
-import { transformNumber, transformString } from '../../utils/transformString';
+import { Film } from '../../types/Film';
 
 import poster from '../../assets/img/poster.jpg';
 import characters from '../../assets/img/characters.jfif';
+import { Person } from '../../types/Person';
 
 interface Props {
   planetId: string;
-  people: Person[],
-  films: Film[],
 }
 
-export const PlanetInfo: React.FC<Props> = ({
-  planetId,
-  people,
-  films,
-}) => {
+export const PlanetInfo: React.FC<Props> = ({ planetId }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [currPlanet, setCurrPlanet] = useState<Planet>();
+  const [films, setFilms] = useState<Film[]>();
+  const [residents, setResidents] = useState<Person[]>();
 
-  const loadPlanet = async () => {
+  const loadPlanet = useCallback(async () => {
     try {
       setIsLoading(true);
-      const planet = await getPlanetById(planetId);
+      const planet: Planet = await getPlanetById(planetId);
+      const movies = await Promise.all(await planet.films.map(async (film) => getFilmById(film.slice(-2))));
+      const people = await Promise.all(await planet.residents.map(async (person) => getPersonById(person.slice(-2))));
 
+      setFilms(movies);
+      setResidents(people);
       setCurrPlanet(await planet);
+
+      console.log(await currPlanet);
+      console.log(movies);
     } catch (error) {
       throw new Error(`${error}`);
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     loadPlanet();
+
+    console.log(currPlanet);
   }, [planetId]);
-
-  const planetFilms = films
-    .filter(film => currPlanet?.films.find(movie => movie === film.url));
-
-  const planetResidents = people
-    .filter(person => currPlanet?.residents
-      .find(resident => resident === person.url));
 
   return (
     <>
@@ -61,7 +66,7 @@ export const PlanetInfo: React.FC<Props> = ({
 
       {currPlanet && (
         <div className="container mx-auto">
-          <section className="text-yellow mb-32 my-24 text-gray-800 text-center md:text-left">
+          <section className="text-yellow px-3 mb-32 my-24 text-gray-800 text-center md:text-left">
             <div>
               <a
                 className="link text-yellow"
@@ -78,7 +83,7 @@ export const PlanetInfo: React.FC<Props> = ({
             <h2 className="text-yellow text-3xl font-bold mb-12 text-center">{currPlanet.name}</h2>
 
             <div className="flex flex-wrap mb-6">
-              <div className="grow-0 shrink-0 basis-auto w-full md:w-3/12 px-3 mb-6 md:mb-0 ml-auto">
+              <div className="grow-0 shrink-0 basis-auto w-full md:w-3/12 mb-6 md:mb-0 ml-auto">
                 <div
                   className="relative overflow-hidden bg-no-repeat bg-cover relative overflow-hidden bg-no-repeat bg-cover ripple shadow-lg rounded-lg mb-6"
                   data-mdb-ripple="true"
@@ -153,10 +158,10 @@ export const PlanetInfo: React.FC<Props> = ({
                         </div>
 
                         <h5 className="text-yellow text-lg font-bold mb-3">Related films</h5>
-                        {planetFilms.length > 0
+                        {films && films.length > 0
                           ? (
                             <ul>
-                              {planetFilms.map((film) => {
+                              {films.map((film) => {
                                 return (
                                   <li key={film.title} className="text-yellow text-gray-500">{film.title}</li>
                                 );
@@ -188,17 +193,17 @@ export const PlanetInfo: React.FC<Props> = ({
                         </div>
 
                         <h5 className="text-yellow text-lg font-bold mb-3">Residents</h5>
-                        {planetResidents.length > 0
+                        {residents && residents.length > 0
                           ? (
                             <ul>
-                              {planetResidents.map((person) => {
+                              {residents.map((person) => {
                                 const id = person.url.split('/').slice(-2)[0];
 
                                 return (
                                   <Link
                                     className="text-yellow text-gray-500 underline link"
                                     to={`/person/${id}`}
-                                    key={person.name}
+                                    key={person.url}
                                   >
                                     {person.name}
                                   </Link>

@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable no-console */
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Select, Option } from '@material-tailwind/react';
@@ -9,20 +9,32 @@ import { Loader } from '../../components/Loader/Loader';
 import { Pagination } from '../../components/Pagination/Pagination';
 
 import { Planet } from '../../types/Planet';
+import { getPlanets } from '../../api/planets';
 
-interface Props {
-  total: number,
-  planets: Planet[],
-  isLoading: boolean,
-}
-
-export const Main: React.FC<Props> = ({
-  total,
-  planets,
-  isLoading,
-}) => {
+export const Main: React.FC = () => {
   const [perPage, setPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [planets, setPlanets] = useState<Planet[]>([]);
+  const [total, setTotal] = useState(0);
+
+  const getDataFromServer = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      const planetsFromServer = await getPlanets();
+
+      setTotal(planetsFromServer.length);
+      setPlanets(await planetsFromServer);
+    } catch (error) {
+      throw new Error(`${error}`);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    getDataFromServer();
+  }, []);
 
   const firstItem = (currentPage - 1) * perPage;
   const lastItem = Math.min((firstItem + perPage), total);
@@ -46,7 +58,9 @@ export const Main: React.FC<Props> = ({
       {planets.length > 0 && (
         <div className="container mx-auto">
           <section className="mx-2.5 text-yellow mb-32 my-24 text-gray-800 text-center md:text-left">
-            <h1 className="text-yellow flex flex-col items-center mb-6 uppercase mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Explore the galaxy far, far away</h1>
+            <h1 className="text-yellow flex flex-col items-center mb-6 uppercase mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              Explore the galaxy far, far away
+            </h1>
             <div className="text-yellow flex w-72 flex-col gap-4 select">
               <Select
                 variant="standard"

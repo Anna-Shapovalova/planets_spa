@@ -8,7 +8,7 @@ export interface Planet {
   climate: string,
   terrain: string,
   surface_water: string,
-  residents: [],
+  residents: string[],
   films: string[],
   url: string,
   created: string,
