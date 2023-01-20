@@ -86,7 +86,7 @@ export const Main: React.FC = () => {
 
                 return (
                   <Link
-                    className="underline link"
+                    className="underline link text-yellow nav-link block pr-2 lg:px-2 py-2 text-gray-600 hover:text-gray-700 focus:text-gray-700 transition duration-150 ease-in-outgit status"
                     key={planet.name}
                     to={`/planet/${planetId}`}
                   >
