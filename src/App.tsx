@@ -5,9 +5,11 @@ import { getPeople, getPlanets, getResourse } from './api/planets';
 import { Main } from './modules/Main';
 import { PlanetPage } from './modules/PlanetPage';
 import { PersonPage } from './modules/PersonPage';
+import { Header } from './components/Header';
 import { Film } from './types/Film';
 import { Person } from './types/Person';
 import { Planet } from './types/Planet';
+import { Footer } from './components/Footer';
 
 export const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -39,7 +41,8 @@ export const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="page">
+    <div className="page min-h-screen">
+      <Header />
       <main className="page__section">
         <Routes>
           <Route
@@ -87,6 +90,7 @@ export const App: React.FC = () => {
           />
         </Routes>
       </main>
+      <Footer />
     </div>
   );
 };

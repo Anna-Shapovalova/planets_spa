@@ -1,10 +1,11 @@
+/* eslint-disable max-len */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-console */
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { getPersonById } from '../../api/planets';
+import { useParams } from 'react-router-dom';
+import { getPersonById, getPersonImg } from '../../api/planets';
 import { Loader } from '../../components/Loader';
 
 import { Person } from '../../types/Person';
@@ -20,7 +21,6 @@ export const PersonPage: React.FC<Props> = ({ planets }) => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [currPerson, setCurrPerson] = useState<Person>();
-  // const [planet, setPlanet] = useState();
 
   const loadPersonData = async () => {
     try {
@@ -47,70 +47,99 @@ export const PersonPage: React.FC<Props> = ({ planets }) => {
   const homePlanet = planets
     .find(planet => planet.url === currPerson?.homeworld);
 
-  // const planetId = currPerson?.homeworld.split('/').slice(-2)[0];
-
   return (
-    <>
-      {isLoading && <Loader />}
+    <div className="container mx-auto">
+      <section className="text-yellow mb-32 my-24 text-gray-800 text-center md:text-left">
+        {isLoading && <Loader />}
 
-      {currPerson && (
-        <>
-          <div>
-            <a
-              onClick={(event) => {
-                event.preventDefault();
-                // eslint-disable-next-line no-restricted-globals
-                history.back();
-              }}
-            >
-              {'< Back'}
-            </a>
-          </div>
+        {currPerson && (
+          <>
+            <div className="container mx-auto">
+              <section className="mb-32 my-24 text-gray-800 text-center md:text-left">
+                <div>
+                  <a
+                    className="link text-yellow"
+                    onClick={(event) => {
+                      event.preventDefault();
+                      // eslint-disable-next-line no-restricted-globals
+                      history.back();
+                    }}
+                  >
+                    {'< Back'}
+                  </a>
+                </div>
 
-          <div>
-            <h1 className="
-              text-5xl
-              font-medium
-              leading-tight
-              text-gray-800
-              mb-2.5
-              mt-0"
-            >
-              {currPerson.name}
-            </h1>
+                <h2 className="text-yellow text-3xl font-bold mb-12 text-center">{currPerson.name}</h2>
 
-            <ul>
-              <li>
-                {`Birth year: ${currPerson.birth_year}`}
-              </li>
-              <li>
-                {`Eye color: ${transformString(currPerson.eye_color)}`}
-              </li>
-              <li>
-                {`Gender: ${transformString(currPerson.gender)}`}
-              </li>
-              <li>
-                {`Hair color: ${transformString(currPerson.hair_color)}`}
-              </li>
-              <li>
-                {`Height: ${currPerson.height}cm`}
-              </li>
-              <li>
-                {`Mass: ${currPerson.mass}kg`}
-              </li>
-              <li>
-                {`Skin color: ${transformString(currPerson.skin_color)}`}
-              </li>
-              <li>
-                {`Homeworld: ${homePlanet?.name}`}
-                <Link to={currPerson?.homeworld.split('/').slice(-2)[0]}>
-                  {homePlanet?.name}
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </>
-      )}
-    </>
+                <div className="flex flex-wrap mb-6">
+                  <div className="grow-0 shrink-0 basis-auto w-full md:w-3/12 px-3 mb-6 md:mb-0 ml-auto">
+                    <div
+                      className="relative overflow-hidden bg-no-repeat bg-cover relative overflow-hidden bg-no-repeat bg-cover ripple shadow-lg rounded-lg mb-6"
+                      data-mdb-ripple="true"
+                      data-mdb-ripple-color="light"
+                    >
+                      <img
+                        src={getPersonImg(id)}
+                        onError={({ currentTarget }) => {
+                          // eslint-disable-next-line no-param-reassign
+                          currentTarget.onerror = null;
+                          // eslint-disable-next-line no-param-reassign
+                          currentTarget.src = 'https://starwars-visualguide.com/assets/img/big-placeholder.jpg';
+                        }}
+                        className="w-full"
+                        alt="Louvre"
+                      />
+                      <div
+                        className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed opacity-0"
+                        style={{ backgroundColor: 'rgba(251, 251, 251, 0.2' }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grow-0 shrink-0 basis-auto w-full md:w-9/12 xl:w-7/12 px-3 mb-6 md:mb-0 mr-auto">
+                    <ul className="text-yellow">
+                      <li className="text-yellow text-gray-500">
+                        {`Birth year: ${currPerson.birth_year}`}
+                      </li>
+                      <li className="text-yellow text-gray-500">
+                        {`Eye color: ${transformString(currPerson.eye_color)}`}
+                      </li>
+                      <li className="text-yellow text-gray-500">
+                        {`Gender: ${transformString(currPerson.gender)}`}
+                      </li>
+                      <li className="text-yellow text-gray-500">
+                        {`Hair color: ${transformString(currPerson.hair_color)}`}
+                      </li>
+                      <li className="text-yellow text-gray-500">
+                        {`Height: ${currPerson.height}cm`}
+                      </li>
+                      <li className="text-yellow text-gray-500">
+                        {`Mass: ${currPerson.mass}kg`}
+                      </li>
+                      <li className="text-yellow text-gray-500">
+                        {`Skin color: ${transformString(currPerson.skin_color)}`}
+                      </li>
+                      <li className="text-yellow text-gray-500">
+                        {'Homeworld: '}
+                        <a
+                          className="text-yellow text-gray-500 underline cursor-pointer"
+                          onClick={(event) => {
+                            event.preventDefault();
+                            // eslint-disable-next-line no-restricted-globals
+                            history.back();
+                          }}
+                        >
+                          {homePlanet?.name}
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </>
+        )}
+      </section>
+    </div>
   );
 };

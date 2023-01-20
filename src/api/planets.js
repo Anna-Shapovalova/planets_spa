@@ -21,6 +21,7 @@ const urlsPeople = [
 ];
 
 const urlBase = 'https://swapi.dev/api';
+const imgBase = 'https://starwars-visualguide.com/assets/img';
 
 const checkStatus = (response) => {
   if (response.ok) {
@@ -76,6 +77,10 @@ export const getPlanetById = async (id) => {
   return planet;
 };
 
+export const getPlanetImg = (id) => {
+  return `${imgBase}/planets/${id}.jpg`;
+};
+
 export const getFilmById = async (id) => {
   const film = await getResourse(`/films/${id}`);
 
@@ -86,4 +91,8 @@ export const getPersonById = async (id) => {
   const person = await getResourse(`/people/${id}`);
 
   return person;
+};
+
+export const getPersonImg = (id) => {
+  return `${imgBase}/characters/${id}.jpg`;
 };
