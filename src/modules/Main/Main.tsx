@@ -45,12 +45,13 @@ export const Main: React.FC<Props> = ({
       {isLoading && <Loader />}
       {planets.length > 0 && (
         <div className="container mx-auto">
-          <section className="text-yellow mb-32 my-24 text-gray-800 text-center md:text-left">
+          <section className="mx-2.5 text-yellow mb-32 my-24 text-gray-800 text-center md:text-left">
+            <h1 className="text-yellow flex flex-col items-center mb-6 uppercase mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Explore the galaxy far, far away</h1>
             <div className="text-yellow flex w-72 flex-col gap-4 select">
               <Select
                 variant="standard"
                 color="yellow"
-                label="Select Version"
+                label="Select Planets per page"
                 value={perPage.toString()}
                 onChange={handlePerPage}
                 className="text-yellow select"
@@ -69,7 +70,7 @@ export const Main: React.FC<Props> = ({
                   <Link
                     className="underline link"
                     key={planet.name}
-                    to={`${planetId}`}
+                    to={`/planet/${planetId}`}
                   >
                     <li className="list__item">
                       <h3>{planet.name}</h3>

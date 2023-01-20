@@ -1,12 +1,41 @@
+/* eslint-disable max-len */
 import React from 'react';
-// import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-export const NotFoundPage: React.FC = () => (
-  <div>
-    <p>
-      Ooops...Something went wrong
-      <br />
-      Hi, Siri!
-    </p>
-  </div>
-);
+import error from '../../assets/img/404.png';
+
+export const NotFoundPage: React.FC = () => {
+  const navigate = useNavigate();
+
+  return (
+    <div className="container mx-auto">
+      <section className="mb-32 my-24 text-gray-800 text-center md:text-left">
+        <div className="flex flex-wrap mb-6">
+          <div className="grow-0 shrink-0 basis-auto w-full md:w-3/12 px-3 mb-6 md:mb-0 m-auto">
+            <div
+              className="relative overflow-hidden bg-no-repeat bg-cover relative overflow-hidden bg-no-repeat bg-cover ripple shadow-lg rounded-lg mb-6"
+              data-mdb-ripple="true"
+              data-mdb-ripple-color="light"
+            >
+              <img
+                src={error}
+                alt="404 error"
+                className="error-img"
+              />
+              <p className="text-yellow uppercase">
+                This page is not fully armed and operational
+              </p>
+              <button
+                type="button"
+                className="uppercase"
+                onClick={() => navigate('/')}
+              >
+                try something else
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};

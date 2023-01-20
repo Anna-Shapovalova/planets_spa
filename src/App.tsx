@@ -10,6 +10,7 @@ import { Film } from './types/Film';
 import { Person } from './types/Person';
 import { Planet } from './types/Planet';
 import { Footer } from './components/Footer';
+import { NotFoundPage } from './modules/NotFoundPage/NotFoundPage';
 
 export const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -43,8 +44,11 @@ export const App: React.FC = () => {
   return (
     <div className="page min-h-screen">
       <Header />
+
       <main className="page__section">
         <Routes>
+          <Route path="*" element={<NotFoundPage />} />
+
           <Route
             path="/"
             element={(
@@ -55,6 +59,7 @@ export const App: React.FC = () => {
               />
             )}
           />
+
           <Route path="/home" element={<Navigate to="/" replace />} />
 
           <Route path="/">
@@ -70,7 +75,7 @@ export const App: React.FC = () => {
             />
 
             <Route
-              path=":name"
+              path="/planet/:name"
               element={(
                 <PlanetPage
                   people={people}
@@ -88,8 +93,10 @@ export const App: React.FC = () => {
               />
             )}
           />
+
         </Routes>
       </main>
+
       <Footer />
     </div>
   );

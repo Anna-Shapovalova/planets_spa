@@ -49,7 +49,7 @@ export const Pagination: React.FC<Props> = ({
         <span className="text-yellow font-semibold text-gray-900 dark:text-white">
           {total}
         </span>
-        {' Entries'}
+        {' Planets'}
       </span>
       <div className="inline-flex mt-2 xs:mt-0">
         <button

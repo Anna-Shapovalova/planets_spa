@@ -45,6 +45,10 @@ body {
     margin: 30px;
   }
 
+  .footer {
+    min-height: 92px;
+  }
+
   .text-blue-gray-500 {
     --tw-text-opacity: 1;
     color: rgb(255 215 0 / var(--tw-text-opacity))!important;
