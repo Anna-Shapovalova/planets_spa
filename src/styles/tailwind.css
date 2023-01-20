@@ -45,6 +45,23 @@ body {
     margin: 30px;
   }
 
+  .text-blue-gray-500 {
+    --tw-text-opacity: 1;
+    color: rgb(255 215 0 / var(--tw-text-opacity))!important;
+  }
+
+  .border-blue-gray-200 {
+    border-color: rgb(255 215 0 / var(--tw-border-opacity))!important;
+  }
+
+  .text-blue-gray-400 {
+    color: rgb(255 215 0 / var(--tw-text-opacity))!important;
+  }
+
+  .bg-white {
+    background-color: rgba(0,0,0,.95)!important;
+  }
+
   .select {
     margin-bottom: 30px;
   }
@@ -54,7 +71,7 @@ body {
   }
 
   section {
-      margin-top: 10px!important;
+      margin-top: 30px!important;
       margin-bottom: 10px!important;
   }
 

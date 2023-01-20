@@ -2,6 +2,8 @@
 /* eslint-disable no-console */
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { Select, Option } from '@material-tailwind/react';
 
 import { Loader } from '../../components/Loader/Loader';
 import { Pagination } from '../../components/Pagination/Pagination';
@@ -28,9 +30,9 @@ export const Main: React.FC<Props> = ({
   const currentItems = planets.slice(firstItem, lastItem);
 
   const handlePerPage = (
-    event: React.ChangeEvent<HTMLSelectElement>,
+    value = '10',
   ) => {
-    setPerPage(Number(event.target.value));
+    setPerPage(Number(value));
     setCurrentPage(1);
   };
 
@@ -44,26 +46,21 @@ export const Main: React.FC<Props> = ({
       {planets.length > 0 && (
         <div className="container mx-auto">
           <section className="text-yellow mb-32 my-24 text-gray-800 text-center md:text-left">
-            <div className="select relative inline-flex items-center cursor-pointer">
-              <label htmlFor="perPageSelector" className="text-yellow block mb-2 mr-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
-              <select
-                id="perPageSelector"
-                className="text-yellow bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-yellow-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                style={{ backgroundColor: 'transparent' }}
-                value={perPage}
+            <div className="text-yellow flex w-72 flex-col gap-4 select">
+              <Select
+                variant="standard"
+                color="yellow"
+                label="Select Version"
+                value={perPage.toString()}
                 onChange={handlePerPage}
+                className="text-yellow select"
               >
-                <option
-                  value={5}
-                  style={{ backgroundColor: 'transparent' }}
-                  className="text-yellow"
-                >
-                  5
-                </option>
-                <option value={10}>10</option>
-                <option value={15}>15</option>
-              </select>
+                <Option className="text-yellow" value="5">5</Option>
+                <Option className="text-yellow" value="10">10</Option>
+                <Option className="text-yellow" value="15">15</Option>
+              </Select>
             </div>
+
             <ul>
               {currentItems.map(planet => {
                 const planetId = planet.url.split('/').slice(-2)[0];
