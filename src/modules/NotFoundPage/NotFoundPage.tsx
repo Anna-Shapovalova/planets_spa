@@ -9,7 +9,7 @@ export const NotFoundPage: React.FC = () => {
 
   return (
     <div className="container mx-auto">
-      <section className="h-[80vh] flex items-center justify-center mb-32 my-24 text-gray-800 text-center">
+      <section className="h-[75vh] flex items-center justify-center mb-32 my-24 text-gray-800 text-center">
         <div className="flex flex-wrap mb-6">
           <div className="grow-0 shrink-0 basis-auto w-full md:w-8/12 px-3 mb-6 md:mb-0 m-auto">
             <div
