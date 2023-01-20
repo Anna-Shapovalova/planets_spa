@@ -35,7 +35,7 @@ export const Pagination: React.FC<Props> = ({
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="pagination flex flex-col items-center">
       <span className="text-yellow text-sm text-gray-700 dark:text-gray-400">
         {'Showing '}
         <span className="text-yellow font-semibold text-gray-900 dark:text-white">
