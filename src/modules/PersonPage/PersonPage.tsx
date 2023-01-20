@@ -23,7 +23,7 @@ export const PersonPage: React.FC = () => {
       setIsLoading(true);
       const person = await getPersonById(id);
 
-      const planet = await getPlanetById(person.homeworld.slice(-2));
+      const planet = await getPlanetById(person.homeworld.split('/').slice(-2)[0]);
 
       setHomePlanet(await planet);
       setCurrPerson(await person);
@@ -114,7 +114,7 @@ export const PersonPage: React.FC = () => {
                         {'Homeworld: '}
                         <Link
                           className="text-yellow text-gray-500 underline cursor-pointer"
-                          to={`/planet/${currPerson.homeworld.slice(-2)}`}
+                          to={`/planet/${currPerson.homeworld.split('/').slice(-2)[0]}`}
                         >
                           {homePlanet?.name}
                         </Link>

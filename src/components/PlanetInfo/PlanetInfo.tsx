@@ -38,8 +38,8 @@ export const PlanetInfo: React.FC<Props> = ({ planetId }) => {
     try {
       setIsLoading(true);
       const planet: Planet = await getPlanetById(planetId);
-      const movies = await Promise.all(await planet.films.map(async (film) => getFilmById(film.slice(-2))));
-      const people = await Promise.all(await planet.residents.map(async (person) => getPersonById(person.slice(-2))));
+      const movies = await Promise.all(await planet.films.map(async (film) => getFilmById(film.split('/').slice(-2)[0])));
+      const people = await Promise.all(await planet.residents.map(async (person) => getPersonById(person.split('/').slice(-2)[0])));
 
       setFilms(movies);
       setResidents(people);
@@ -198,6 +198,9 @@ export const PlanetInfo: React.FC<Props> = ({ planetId }) => {
                             <ul>
                               {residents.map((person) => {
                                 const id = person.url.split('/').slice(-2)[0];
+
+                                console.log('id', id);
+                                console.log('url', person.url);
 
                                 return (
                                   <Link

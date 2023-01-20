@@ -80,6 +80,10 @@ export const Main: React.FC = () => {
               {currentItems.map(planet => {
                 const planetId = planet.url.split('/').slice(-2)[0];
 
+                console.log('url', planet.url);
+                console.log('planet', planet);
+                console.log('id', planetId);
+
                 return (
                   <Link
                     className="underline link"
