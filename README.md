@@ -10,7 +10,7 @@ It renders in the root route /; it shows the main list of planets. You can choos
 The planet details page renders in the /planet/[id] route (where id is the ID of the planet); it shows the planet information. It also performs new requests to retrieve related films and residents of the planet.
 The residents are actually the links to the people's pages that contain information about them and a link to their "homeworld".
 
-You can always return to the home page by clicking the logo or text in the header or footer.
+You can always return to the home page by clicking the logo or text in the header or footer. The "back button"on the planet and resident description pages works actually like "go back" - it returns to the previous page you visited.
 
 # Getting Started with Create React App
 
