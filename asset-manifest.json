@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/planets_spa/static/css/main.fb214868.css",
-    "main.js": "/planets_spa/static/js/main.061910fe.js",
+    "main.js": "/planets_spa/static/js/main.6d9d8606.js",
     "static/media/404.png": "/planets_spa/static/media/404.5f3d0cbc8c03aa0f1045.png",
     "static/media/characters.jfif": "/planets_spa/static/media/characters.dda4abd3807298550538.jfif",
     "static/media/poster.jpg": "/planets_spa/static/media/poster.7f09d84abdaf6eb5685a.jpg",
     "index.html": "/planets_spa/index.html",
     "main.fb214868.css.map": "/planets_spa/static/css/main.fb214868.css.map",
-    "main.061910fe.js.map": "/planets_spa/static/js/main.061910fe.js.map"
+    "main.6d9d8606.js.map": "/planets_spa/static/js/main.6d9d8606.js.map"
   },
   "entrypoints": [
     "static/css/main.fb214868.css",
-    "static/js/main.061910fe.js"
+    "static/js/main.6d9d8606.js"
   ]
 }
