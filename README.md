@@ -1,5 +1,17 @@
 # [DEMO LINK](https://anna-Shapovalova.github.io/planets_spa)
 
+Web catalog of Star Wars Planets, using the data provided by [The Star Wars API](https://swapi.dev/), it is a [React](https://reactjs.org/) + [TypeScript](https://www.typescriptlang.org/) application. The components are styled using [Tailwind CSS](https://tailwindcss.com/).
+
+You can visit a live version of the application [here](https://anna-Shapovalova.github.io/planets_spa).
+
+The app consists of 1 main page:
+
+It renders in the root route /; it shows the main list of planets. You can choose the count of planets displayed on the screen by selecting the required number in the "select" field.
+The planet details page renders in the /planet/[id] route (where id is the ID of the planet); it shows the planet information. It also performs new requests to retrieve related films and residents of the planet.
+The residents are actually the links to the people's pages that contain information about them and a link to their "homeworld".
+
+You can always return to the home page by clicking the logo or text in the header or footer.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
