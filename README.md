@@ -6,7 +6,7 @@ You can visit a live version of the application [here](https://anna-Shapovalova.
 
 The app consists of 1 main page:
 
-It renders in the root route /; it shows the main list of planets. You can choose the count of planets displayed on the screen by selecting the required number in the "select" field.
+It renders in the root route /; it shows the main list of planets. You can choose the count of planets displayed on the screen by selecting the required number (5, 10 or 15) in the "select" field.
 The planet details page renders in the /planet/[id] route (where id is the ID of the planet); it shows the planet information. It also performs new requests to retrieve related films and residents of the planet.
 The residents are actually the links to the people's pages that contain information about them and a link to their "homeworld".
 
